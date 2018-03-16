@@ -7,8 +7,17 @@ pipeline {
       }
     }
     stage('DeployTo-A') {
-      steps {
-        echo 'This will deploy to env A'
+      parallel {
+        stage('DeployTo-A') {
+          steps {
+            echo 'This will deploy to env A'
+          }
+        }
+        stage('Deployto-B') {
+          steps {
+            echo 'This will deploy to B'
+          }
+        }
       }
     }
   }
